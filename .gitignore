@@ -1,1 +1,3 @@
-server/settings.py
+settings.py
+__pycache__/
+*.py[cod]

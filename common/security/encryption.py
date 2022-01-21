@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-from server.settings import Encryption
+from settings import Encryption
 
 def encrypt(message):
     fernet = Fernet(Encryption.key)

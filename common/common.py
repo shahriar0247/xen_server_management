@@ -4,7 +4,7 @@ def send(sock, text):
     send_bytes(sock, encrypt(text))
    
 def send_bytes(sock, bytes):
-    sock.send(bytes, "utf-8")
+    sock.send(bytes)
 
 def recv(sock, buffer):
     recieved = sock.recv(buffer)
@@ -13,6 +13,10 @@ def recv(sock, buffer):
         total = total + recieved
         recieved = sock.recv(buffer)
     return total
+
+def recv_text(sock, buffer=1024):
+    recieved = sock.recv(buffer)
+    return decrypt(recieved)
 
 def decode(data):
     data = decrypt(data)

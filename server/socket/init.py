@@ -1,5 +1,5 @@
 import socket
-from common.common import send, recv
+from common.common import recv_text, send, recv
 from server.security.verification import verify_client
 import settings
 import threading
@@ -23,6 +23,7 @@ class server:
         while True:
             client, address = self.accept_client(sock)
             send(client, "hello")
+            print(recv_text(client))
             if verify_client(client):
                 self.ALL_CLIENTS.append([client, address])
 
