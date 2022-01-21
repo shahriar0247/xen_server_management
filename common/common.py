@@ -1,5 +1,7 @@
+from common.security.encryption import decrypt, encrypt
+
 def send(sock, text):
-    send_bytes(sock, bytes(text, "utf-8"))
+    send_bytes(sock, encrypt(text))
    
 def send_bytes(sock, bytes):
     sock.send(bytes, "utf-8")
@@ -13,5 +15,5 @@ def recv(sock, buffer):
     return total
 
 def decode(data):
-    data = data.decode("utf-8")
+    data = decrypt(data)
     return data

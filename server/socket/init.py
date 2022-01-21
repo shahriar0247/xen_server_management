@@ -2,11 +2,12 @@ import socket
 from common.common import send, recv
 from server.security.verification import verify_client
 import settings
-
+import threading
 
 class server:
 
     ALL_CLIENTS = []
+    ACCEPT_CLIENTS_THREAD = None
 
     def create_socket(self, ip, port):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,4 +28,6 @@ class server:
 
     def __init__(self):
         sock = self.create_socket("0.0.0.0", settings.SOCKET.port)
-        self.keep_accepting(sock)
+        self.ACCEPT_CLIENTS_THREAD = threading.Thread(target=self.keep_accepting, args=[sock])
+        self.ACCEPT_CLIENTS_THREAD.start()
+        
